@@ -1,0 +1,16 @@
+django 
+django-cors-headers 
+djangorestframework 
+pytz 
+requests 
+django-redis 
+redis 
+celery 
+django-celery-beat 
+django-extensions 
+django-debug-toolbar 
+psycopg2 
+mysqlclient 
+pillow 
+django-filter 
+django-environ
