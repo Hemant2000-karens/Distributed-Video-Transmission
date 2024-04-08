@@ -1,0 +1,2 @@
+# Distributed-Video-Transmission
+ This repository contains the source code for a distributed video transmission system built with Django, designed to facilitate real-time video broadcasting and playback across distributed networks. The system incorporates advanced features such as clock synchronization, mutual exclusion, fault tolerance, and distributed transaction management. Utilizing Django's robust framework, the project aims to provide a seamless and scalable solution for video conferencing and streaming applications.
