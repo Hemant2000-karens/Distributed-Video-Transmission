@@ -16,7 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from dvs_app import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',views.show_broadcast, name='show_broadcast'),
 ]
+
+# print("BASE_DIR:", path('show_broadcast/'))

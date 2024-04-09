@@ -1,0 +1,29 @@
+{% load static %}
+
+<!-- show_broadcast.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- show_broadcast.html -->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+
+    <title>Live Broadcasting</title>
+</head>
+<script src="{% static 'js/script.js' %}"></script>
+<body>
+    {% if broadcast_info %}
+        {% if current_time >= broadcast_info.broadcast_time %}
+            <video controls>
+                <source src="{{ broadcast_info.video_filename }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        {% else %}
+            <p>The show will start at {{ broadcast_info.broadcast_time }} ({{ broadcast_info.timezone }}).</p>
+        {% endif %}
+    {% else %}
+        <p>No broadcasting information available.</p>
+    {% endif %}
+</body>
+</html>
