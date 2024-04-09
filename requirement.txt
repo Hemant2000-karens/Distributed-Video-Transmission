@@ -9,7 +9,7 @@ celery
 django-celery-beat 
 django-extensions 
 django-debug-toolbar 
-psycopg2 
+psycopg2-binary
 mysqlclient 
 pillow 
 django-filter 
