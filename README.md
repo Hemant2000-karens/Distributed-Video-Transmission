@@ -25,29 +25,48 @@ This repository contains the source code for a distributed video transmission sy
 
 ### Prerequisites
 
-- Python (version X.X.X)
-- Django (version X.X.X)
-- Docker (version X.X.X)
+- Python (version 3.9 and later)
+- Django (version latest)
+- Docker (version latest)
 - Redis (version X.X.X)
-## Installation
+# Installation
 
 
-1. Clone the repository:
+#### 1. Clone the repository:
     
-    ```
     git clone https://github.com/Hemant-2000karens/distributed-video-transmission.git
    
-2. Installing the packages required:
+#### 2. Installing the packages required:
+    sudo apt install python3 python3-pip python3-dev default-libmysqlclient-dev build-essential pkg-config virtualenv
+    mariadb-server
 
-    ```bash
+#### 3. Activating virtualenv:
+
+    cd <Project Location>
+    virtualenv venv
+    source venv/bin/activate
+
+    
+#### 4. Installation of dependencies packages:
+
     pip install -r requirement.txt
 
-3. Run Migration:
-    ```bash
+#### 5. Making migrations and settings
+
+Firstly, setup and turn on Mysql Server, make a new user name root and with passowrd `passowrd`, then create database named by `DistributedSystem`, then futher create tables `code` and `code`.
+
+Now enter command in shell
+
+    cd <Project Location>
+
+    python manage.py makemigrations dvs_app
     python manage.py migrate
-    
-4. Run Development Server:
-    ```
+
+#### 6. Running the Development Server
+
+    python manage.py runserver
+
+
 ## Screenshots
 
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
@@ -55,7 +74,7 @@ This repository contains the source code for a distributed video transmission sy
 
 ## Authors
 
-- [@octokatherine](https://www.github.com/octokatherine)
+- [@Hemant Kumar](https://www.github.com/Hemant2000-karens/)
 
 
 ## FAQ
