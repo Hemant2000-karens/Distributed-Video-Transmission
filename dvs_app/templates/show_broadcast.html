@@ -7,11 +7,11 @@
 <head>
     <!-- show_broadcast.html -->
 
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
     <title>Live Broadcasting</title>
 </head>
-<script src="{% static 'js/script.js' %}"></script>
+
 <body>
     {% if broadcast_info %}
         {% if current_time >= broadcast_info.broadcast_time %}
