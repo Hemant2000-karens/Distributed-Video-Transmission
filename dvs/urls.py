@@ -21,7 +21,8 @@ from dvs_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.show_broadcast, name='show_broadcast'),
+    path('',views.show_broadcast, name='show_broadcast/'),
+    #path('..','media/videos/',name=videos),
 ]
 
 # print("BASE_DIR:", path('show_broadcast/'))
