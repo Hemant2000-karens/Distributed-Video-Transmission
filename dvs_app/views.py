@@ -7,6 +7,12 @@ from django.contrib.auth import logout
 from django.utils import timezone
 from .models import BroadcastingInfo
 from django.urls import reverse
+
+
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from .models import BroadcastingInfo
+
 # def show_broadcast(request):
 #     current_time = timezone.now()
 #     broadcast_info = BroadcastingInfo.objects.first()  # Fetch broadcasting info from database
@@ -51,3 +57,43 @@ def logout_view(request):
 
 
 
+
+# views.py
+
+
+# @require_POST
+# def update_watch_count(request):
+#     if request.user.is_authenticated:
+#         if request.POST.get('action') == 'play':
+#             video_id = request.POST.get('video_id')
+#             try:
+#                 video = Video.objects.get(pk=video_id)
+#                 video.watch_count += 1
+#                 video.save()
+#                 return JsonResponse({'success': True})
+#             except Video.DoesNotExist:
+#                 return JsonResponse({'success': False, 'error': 'Video not found.'})
+#         else:
+#             return JsonResponse({'success': False, 'error': 'Invalid action.'})
+#     else:
+#         return JsonResponse({'success': False, 'error': 'Authentication required.'})
+
+
+# views.py
+
+@require_POST
+def update_watch_count(request):
+    if request.user.is_authenticated:
+        if request.POST.get('action') == 'play':
+            video_id = request.POST.get('video-player')
+            try:
+                broadcast_info = BroadcastingInfo.objects.get(pk=video_id)
+                broadcast_info.viewers_count += 1
+                broadcast_info.save()
+                return JsonResponse({'success': True})
+            except BroadcastingInfo.DoesNotExist:
+                return JsonResponse({'success': False, 'error': 'Broadcasting info not found.'})
+        else:
+            return JsonResponse({'success': False, 'error': 'Invalid action.'})
+    else:
+        return JsonResponse({'success': False, 'error': 'Authentication required.'})
