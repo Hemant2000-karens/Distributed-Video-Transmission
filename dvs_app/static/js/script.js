@@ -18,26 +18,26 @@
 // });
 
 
-const videoPlayer = document.getElementById('video-player');
-    videoPlayer.addEventListener('play', function() {
-        const videoId = '{{ broadcast_info.pk }}';
-        fetch('/update_watch_count/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}'
-            },
-            body: JSON.stringify({
-                action: 'play',
-                video_id: videoId
-            })
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('Watch count updated successfully');
-            } else {
-                console.error('Failed to update watch count');
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    });
+// const videoPlayer = document.getElementById('video-player');
+//     videoPlayer.addEventListener('play', function() {
+//         const videoId = '{{ broadcast_info.pk }}';
+//         fetch('/update_watch_count/', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'X-CSRFToken': '{{ csrf_token }}'
+//             },
+//             body: JSON.stringify({
+//                 action: 'play',
+//                 video_id: videoId
+//             })
+//         })
+//         .then(response => {
+//             if (response.ok) {
+//                 console.log('Watch count updated successfully');
+//             } else {
+//                 console.error('Failed to update watch count');
+//             }
+//         })
+//         .catch(error => console.error('Error:', error));
+//     });

@@ -55,11 +55,6 @@ def logout_view(request):
     # Redirect to a page after logout
     return HttpResponseRedirect(reverse('login'))  # Replace '/login/' with your login URL
 
-
-
-
-
-
 # views.py
 
 
