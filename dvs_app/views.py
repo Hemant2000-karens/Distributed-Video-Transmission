@@ -78,19 +78,34 @@ def logout_view(request):
 
 # views.py
 
+# @require_POST
+# def update_watch_count(request):
+#     if request.user.is_authenticated:
+#         if request.POST.get('action') == 'play':
+#             video_id = request.POST.get('video-player')
+#             try:
+#                 broadcast_info = BroadcastingInfo.objects.get(pk=video_id)
+#                 broadcast_info.viewers_count += 1
+#                 broadcast_info.save()
+#                 return JsonResponse({'success': True})
+#             except BroadcastingInfo.DoesNotExist:
+#                 return JsonResponse({'success': False, 'error': 'Broadcasting info not found.'})
+#         else:
+#             return JsonResponse({'success': False, 'error': 'Invalid action.'})
+#     else:
+#         return JsonResponse({'success': False, 'error': 'Authentication required.'})
+
+
+# views.py
+
+
 @require_POST
 def update_watch_count(request):
-    if request.user.is_authenticated:
-        if request.POST.get('action') == 'play':
-            video_id = request.POST.get('video-player')
-            try:
-                broadcast_info = BroadcastingInfo.objects.get(pk=video_id)
-                broadcast_info.viewers_count += 1
-                broadcast_info.save()
-                return JsonResponse({'success': True})
-            except BroadcastingInfo.DoesNotExist:
-                return JsonResponse({'success': False, 'error': 'Broadcasting info not found.'})
-        else:
-            return JsonResponse({'success': False, 'error': 'Invalid action.'})
-    else:
-        return JsonResponse({'success': False, 'error': 'Authentication required.'})
+    video_id = request.POST.get('video_id')
+    try:
+        broadcast_info = BroadcastingInfo.objects.get(video_id=video_id)
+        broadcast_info.viewers_count += 1
+        broadcast_info.save()
+        return JsonResponse({'success': True})
+    except BroadcastingInfo.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Broadcasting info not found.'})

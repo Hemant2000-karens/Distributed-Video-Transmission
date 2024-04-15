@@ -21,8 +21,8 @@ class BroadcastingInfo(models.Model):
     broadcast_time = models.DateTimeField()
     timezone = models.CharField(max_length=100)
     video_filename = models.CharField(max_length=255)
-    viewers_count = models.IntegerField(default=0)  # Add this field
-    video_file = models.FileField(upload_to='videos/', null=True, blank=True)
+    viewers_count = models.IntegerField(default=0)
+    video_id = models.CharField(max_length=100, unique=True, default='0V')
 
     def __str__(self):
         return f"Broadcast at {self.broadcast_time}"

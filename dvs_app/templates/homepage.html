@@ -1,11 +1,9 @@
-<!-- homepage.html -->
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  <script src="{% static 'js/script.js' %}"></script>
     <!-- Meta tags, CSS links, etc. -->
 </head>
 <body>
@@ -32,7 +30,7 @@
 <div class="container">
   {% if broadcast_info %}
   {% if current_time >= broadcast_info.broadcast_time %}
-      <video controls id="video-player">
+      <video controls id="video-player" data-video-id="{{ broadcast_info.pk }}">
           <source src="{% static 'videos/' %}{{ broadcast_info.video_filename }}" type="video/mp4">
           Your browser does not support the video tag.
       </video>
@@ -44,11 +42,19 @@
 {% endif %}
 </div>
 
+<input type="hidden" id="csrf-token" value="{% csrf_token %}">
+
 </body>
+<!--<script src="{% static 'js/script.js' %}"></script>-->
 <script>
-const videoPlayer = document.getElementById('video-player');
-    videoPlayer.addEventListener('play', function() {
-        const videoId = '{{ broadcast_info.pk }}';
+var videoPlayer = document.getElementById("video-player");
+var hasUpdated = false; // Variable to track whether the view count has been updated
+var csrftoken = document.getElementById("csrf-token").value;
+
+
+videoPlayer.addEventListener('play', function() {
+    if (!hasUpdated) {
+        const videoId = videoPlayer.dataset.videoId;
         fetch('/update_watch_count/', {
             method: 'POST',
             headers: {
@@ -63,13 +69,45 @@ const videoPlayer = document.getElementById('video-player');
         .then(response => {
             if (response.ok) {
                 console.log('Watch count updated successfully');
+                hasUpdated = true; // Set to true to prevent further updates
             } else {
                 console.error('Failed to update watch count');
             }
         })
         .catch(error => console.error('Error:', error));
-    });
+    }
+});
+
+videoPlayer.addEventListener('pause', function() {
+    if (!hasUpdated) {
+        const videoId = videoPlayer.dataset.videoId;
+        fetch('/update_watch_count/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({
+                action: 'pause',
+                video_id: videoId
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Watch count updated successfully');
+                hasUpdated = true; // Set to true to prevent further updates
+            } else {
+                console.error('Failed to update watch count');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+});
+
+
+
+const videoId = videoPlayer.dataset.videoId;
+    console.log('Video ID:', videoId);
 
 </script>
-
 </html>
