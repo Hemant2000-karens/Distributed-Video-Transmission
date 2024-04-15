@@ -24,6 +24,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.show_broadcast, name='show_broadcast'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 # print("BASE_DIR:", path('show_broadcast/'))

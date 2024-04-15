@@ -1,4 +1,7 @@
 from django.db import models
+from django.utils import timezone
+import pytz
+
 
 # Create your models here.
 class ClientInteractionLog(models.Model):
@@ -9,7 +12,25 @@ class ClientInteractionLog(models.Model):
     def __str__(self):
         return f'{self.timestamp} - {self.client_ip} - {self.action}'
 
+# class BroadcastingInfo(models.Model):
+#     broadcast_time = models.DateTimeField()
+#     timezone = models.CharField(max_length=100)
+#     video_filename = models.CharField(max_length=255)
+
 class BroadcastingInfo(models.Model):
     broadcast_time = models.DateTimeField()
     timezone = models.CharField(max_length=100)
     video_filename = models.CharField(max_length=255)
+    viewers_count = models.IntegerField(default=0)  # Add this field
+    video_file = models.FileField(upload_to='videos/', null=True, blank=True)
+
+    def __str__(self):
+        return f"Broadcast at {self.broadcast_time}"
+
+class ServerTimeZone(models.Model):
+    server_name = models.CharField(max_length=100)
+    TIMEZONE_CHOICES = [(tz, tz) for tz in pytz.all_timezones]
+    timezone = models.CharField(max_length=100, choices=TIMEZONE_CHOICES)
+
+    def __str__(self):
+        return self.server_name

@@ -16,7 +16,7 @@
     {% if broadcast_info %}
         {% if current_time >= broadcast_info.broadcast_time %}
             <video controls>
-                <source src="{{ broadcast_info.video_filename }}" type="video/mp4">
+                <source src="{% static 'videos/' %}{{ broadcast_info.video_filename }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         {% else %}
