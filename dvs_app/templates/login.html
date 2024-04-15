@@ -172,10 +172,12 @@
 
                 <h2 class="title" style="font-size: 20px;">Distributed Video Login</h2>
 
-                <form action="/login/" class="the-form" method="POST">
+                <form action="{% url 'login' %}" class="the-form" method="POST" autocomplete="off">
                     
                     <!-- Add CSRF token -->
                     {% csrf_token %}
+
+					
 
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username" placeholder="Enter your username">

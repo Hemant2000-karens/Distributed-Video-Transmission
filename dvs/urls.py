@@ -17,14 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from dvs_app import views
-from dvs_app.views import login_view
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', login_view, name='login'),
-    path('', views.show_broadcast, name='show_broadcast'),
+    path('',views.login_view,name='login'),
+    path('homepage/', views.home_view, name='homepage'),
+    path('logout/',views.logout_view, name='logout'),
+    path('show_broadcast/', views.show_broadcast, name='show_broadcast'),
 ]
 
 # print("BASE_DIR:", path('show_broadcast/'))
