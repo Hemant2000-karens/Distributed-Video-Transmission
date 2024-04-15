@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Page</title>
+    
+    <!-- Add your CSS styles here -->
+
+    <style type="text/css">
+		*
+		{
+			box-sizing: border-box;
+			font-family: sans-serif;
+			outline: none;
+		}
+		body,html
+		{
+			margin: 0;
+			padding: 0;
+		}
+		body
+		{
+
+			background: linear-gradient(45deg, #ffffff 15%, #f3eefc 74%);
+			background-repeat: no-repeat;
+			background-size: cover;
+			height: 100vh;
+			display: grid;
+			justify-items: center;
+    		align-items: center;
+    		justify-content: space-evenly;
+		}
+		.parent
+		{	
+			width: 100%;
+/*			padding: 4% 15%;*/
+		}
+		.child
+		{
+			background: #f9ffe97d;
+    		border-radius: 25px;
+    		padding: 5% 20%;
+    		backdrop-filter: blur(30px);
+    		box-shadow: 2px 2px 20px 4px #ffe0fa87;
+		}
+
+		@media only screen
+		and (max-width: 650px)
+		{	
+			.parent
+			{
+				padding: 4% 0%;
+			}
+			.child
+			{
+				padding: 10%;
+			}
+		}
+
+		@media only screen
+		and (max-width: 450px)
+		{	
+			.parent
+			{
+				padding: 0%;
+			}
+			.child
+			{
+				padding: 10%;
+			}
+		}
+		.form-body
+		{
+    		display: grid;
+    		justify-items: center;
+    		align-items: center;
+    		text-align: center;
+		}
+
+		.second
+		{
+			background: #dbdbdb;
+    		border-radius: 5px;
+    		padding: 10px;
+		}
+
+		.form-body [type="text"],
+		.form-body [type="password"]
+		{
+			background: #ccc;
+    		height: 40px;
+    		border-radius: 5px;
+    		border: none;
+    		width: 100%;
+    		padding: 15px;
+    		font-size: 16px;
+    		margin: 11px 0;
+		}
+
+		label
+		{
+			color: #969696;
+			font-weight: bold;
+			font-size: 18px;
+			float: left;
+		}
+
+		.the-form .title2
+		{
+    		margin: 5.5px;
+    		color: #969696;
+		}
+
+		.the-form [type="text"]::-webkit-input-placeholder,
+		.the-form [type="password"]::-webkit-input-placeholder {
+		  color: #0038a4;
+		}
+
+		.the-form [type="text"]:focus,
+		.the-form [type="password"]:focus
+		{
+  			background: #ffffff;
+  			color: #3f3f3f;
+		}
+		.the-form [type="submit"]
+		{
+			margin: 20px 0;
+    		width: 100%;
+    		height: 45px;
+    		font-weight: bold;
+    		font-size: 20px;
+    		background: #11007e;
+    		color: #f7f5fc;
+    		border: none;
+    		border-radius: 5px;
+		}
+
+		.the-form [type="submit"]:hover {
+		  opacity: 0.9;
+		}
+
+		.logo-center
+		{
+		  padding: 0 0 10px 0;
+		  height: auto;
+		  display: grid;
+		  align-items: center;
+		  justify-items: center;
+		}
+		
+		.logoimg
+		{
+		  height: 80px;
+		  width: auto;
+		}
+	</style>
+
+</head>
+<body>
+
+<div class="parent">
+    
+    <div class="child">
+
+        <div class="form-body">
+
+                <div class="logo-center">
+                    <!-- Add your logo here -->
+                    <img src="http://sitedev.iiitdmj.ac.in/logo.png" class="logoimg" alt="Logo">
+                </div>
+
+                <h2 class="title" style="font-size: 20px;">Distributed Video Login</h2>
+
+                <form action="/login/" class="the-form" method="POST">
+                    
+                    <!-- Add CSRF token -->
+                    {% csrf_token %}
+
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" placeholder="Enter your username">
+
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Enter your password">
+
+                    <input type="submit" value="Log In">
+
+                </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
