@@ -27,7 +27,7 @@ urlpatterns = [
     path('',views.login_view,name='login'),
     path('homepage/', views.home_view, name='homepage'),
     path('logout/',views.logout_view, name='logout'),
-    path('show_broadcast/', views.show_broadcast, name='show_broadcast'),
+    #path('show_broadcast/', views.show_broadcast, name='show_broadcast'),
 ]
 
 # print("BASE_DIR:", path('show_broadcast/'))

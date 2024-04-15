@@ -34,18 +34,20 @@ def login_view(request):
     else:
         return render(request, 'login.html')
 
-@login_required  # Add this decorator to restrict access to authenticated users only
-def show_broadcast(request):
-    current_time = timezone.now()
-    broadcast_info = BroadcastingInfo.objects.first()
-    if broadcast_info:
-        broadcast_info.viewers_count += 1
-        broadcast_info.save()
-    return render(request, 'show_broadcast.html', {'current_time': current_time, 'broadcast_info': broadcast_info})
+# @login_required  # Add this decorator to restrict access to authenticated users only
+# def show_broadcast(request):
+#     current_time = timezone.now()
+#     broadcast_info = BroadcastingInfo.objects.first()
+#     if broadcast_info:
+#         broadcast_info.viewers_count += 1
+#         broadcast_info.save()
+#     return render(request, 'show_broadcast.html', {'current_time': current_time, 'broadcast_info': broadcast_info})
 
 @login_required
 def home_view(request):
-    return render(request, 'homepage.html')
+    current_time = timezone.now()
+    broadcast_info = BroadcastingInfo.objects.first()
+    return render(request, 'homepage.html', {'current_time': current_time, 'broadcast_info': broadcast_info})
                   
 
 def logout_view(request):
