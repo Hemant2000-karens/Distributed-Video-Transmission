@@ -1,6 +1,8 @@
 # middleware.py
 import ntplib
 from .models import ClientInteractionLog
+from ntplib import NTPException
+import time
 
 class ClientInteractionMiddleware:
     def __init__(self, get_response):
@@ -26,7 +28,17 @@ class NTPTimeMiddleware:
         response = self.get_response(request)
         return response
 
-    def synchronize_time(self):
-        client = ntplib.NTPClient()
-        response = client.request('pool.ntp.org', version=3)
-        return response.tx_time
+    def synchronize_time(self, max_retries=3, retry_interval=1):
+        retries = 0
+        while retries < max_retries:
+            try:
+                client = ntplib.NTPClient()
+                response = client.request('in.pool.ntp.org', version=3)
+                if response:
+                    return response.tx_time
+            except NTPException as e:
+                print(f"NTP synchronization failed: {e}")
+                retries += 1
+                time.sleep(retry_interval)
+                return time.time()
+        return None 

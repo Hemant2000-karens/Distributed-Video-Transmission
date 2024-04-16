@@ -9,7 +9,7 @@ class ClientInteractionLog(models.Model):
     client_ip = models.GenericIPAddressField()
     #ip_address = models.GenericIPAddressField()
     action = models.CharField(max_length=100)
-    username = models.CharField(max_length=150)
+    username = models.CharField(max_length=150, default='anonymous')
     def __str__(self):
         return f'{self.timestamp} - {self.client_ip} - {self.action} - {self.username}'
 
