@@ -14,3 +14,4 @@ mysqlclient
 pillow 
 django-filter 
 django-environ
+ntplib
