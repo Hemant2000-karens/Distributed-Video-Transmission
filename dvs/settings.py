@@ -136,6 +136,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'dvs_app', 'static'),
 ]
 
+MIDDLEWARE = [
+    # Other middleware classes...
+    'dvs_app.middleware.ClientInteractionMiddleware',
+]
 
 #MEDIA_ROOT = '/home/nd-system/Documents/GitHub/Distributed-Video-Transmission/media/videos'
 

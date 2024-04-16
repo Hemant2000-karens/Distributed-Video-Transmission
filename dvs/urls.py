@@ -29,6 +29,7 @@ urlpatterns = [
     path('logout/',views.logout_view, name='logout'),
     #path('show_broadcast/', views.show_broadcast, name='show_broadcast'),
     path('update_watch_count/', views.update_watch_count, name='update_watch_count'),
+    path('some-action/<str:codec>/', views.my_view, name='my-view'),
 ]
 
 # print("BASE_DIR:", path('show_broadcast/'))

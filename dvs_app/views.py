@@ -12,7 +12,8 @@ from django.urls import reverse
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from .models import BroadcastingInfo
-
+from .models import ApplicationLog
+from .models import ClientInteractionLog
 # def show_broadcast(request):
 #     current_time = timezone.now()
 #     broadcast_info = BroadcastingInfo.objects.first()  # Fetch broadcasting info from database
@@ -109,3 +110,24 @@ def update_watch_count(request):
         return JsonResponse({'success': True})
     except BroadcastingInfo.DoesNotExist:
         return JsonResponse({'success': False, 'error': 'Broadcasting info not found.'})
+
+# views.py
+
+
+@login_required
+def my_view(request):
+    # Log application actions
+    ApplicationLog.objects.create(action='User viewed a video')
+    
+
+    client_ip = request.META.get('REMOTE_ADDR')
+    action = 'Performed some action'  # Update with your action
+    
+    # Create a new log entry
+    log_entry = ClientInteractionLog.objects.create(
+        client_ip=client_ip,action=action
+    )
+    
+    # Return a JSON response indicating success
+    return JsonResponse({'success': True})
+    # Your view logic...

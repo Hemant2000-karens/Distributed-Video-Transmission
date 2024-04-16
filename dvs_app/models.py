@@ -12,6 +12,11 @@ class ClientInteractionLog(models.Model):
     def __str__(self):
         return f'{self.timestamp} - {self.client_ip} - {self.action}'
 
+
+class ApplicationLog(models.Model):
+    action = models.CharField(max_length=100)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
 # class BroadcastingInfo(models.Model):
 #     broadcast_time = models.DateTimeField()
 #     timezone = models.CharField(max_length=100)
