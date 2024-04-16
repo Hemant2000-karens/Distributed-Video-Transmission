@@ -14,6 +14,10 @@ from django.views.decorators.http import require_POST
 from .models import BroadcastingInfo
 from .models import ApplicationLog
 from .models import ClientInteractionLog
+
+import threading
+import multiprocessing
+
 # def show_broadcast(request):
 #     current_time = timezone.now()
 #     broadcast_info = BroadcastingInfo.objects.first()  # Fetch broadcasting info from database
@@ -131,3 +135,35 @@ def my_view(request):
     # Return a JSON response indicating success
     return JsonResponse({'success': True})
     # Your view logic...
+
+
+# Create a global lock object
+lock = threading.Lock()
+
+def synchronized_view(request):
+    # Acquire the lock before accessing the critical section
+    lock.acquire()
+    try:
+        # Critical section - Access shared resources here
+        # For example, update a shared database record
+        # Ensure that any database operations are atomic
+        # Return a JSON response indicating success or failure
+        return JsonResponse({'success': True})
+    finally:
+        # Release the lock after completing the critical section
+        lock.release()
+
+
+lock = multiprocessing.Lock()
+
+def synchronized_view(request):
+    # Acquire the lock before accessing the critical section
+    lock.acquire()
+    try:
+        # Critical section - Access shared resources here
+        # Ensure that any operations are thread-safe
+        # Return a JSON response indicating success or failure
+        return JsonResponse({'success': True})
+    finally:
+        # Release the lock after completing the critical section
+        lock.release()
