@@ -6,7 +6,8 @@ import pytz
 # Create your models here.
 class ClientInteractionLog(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
-    client_ip = models.CharField(max_length=100)
+    client_ip = models.GenericIPAddressField()
+    #ip_address = models.GenericIPAddressField()
     action = models.CharField(max_length=100)
 
     def __str__(self):
