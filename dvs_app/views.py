@@ -14,10 +14,12 @@ from django.views.decorators.http import require_POST
 from .models import BroadcastingInfo
 from .models import ApplicationLog
 from .models import ClientInteractionLog
-
+from .models import BullyAlgorithm
 import threading
 import multiprocessing
 
+
+servers = [1, 2, 3]
 # def show_broadcast(request):
 #     current_time = timezone.now()
 #     broadcast_info = BroadcastingInfo.objects.first()  # Fetch broadcasting info from database
@@ -52,7 +54,10 @@ def login_view(request):
 def home_view(request):
     current_time = timezone.now()
     broadcast_info = BroadcastingInfo.objects.first()
+    bully_algorithm = BullyAlgorithm(server_id=request.server_id, all_servers=servers)
+    bully_algorithm.leader_election()
     return render(request, 'homepage.html', {'current_time': current_time, 'broadcast_info': broadcast_info})
+
                   
 
 def logout_view(request):

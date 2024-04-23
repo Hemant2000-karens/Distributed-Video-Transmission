@@ -42,3 +42,15 @@ class NTPTimeMiddleware:
                 time.sleep(retry_interval)
                 return time.time()
         return None 
+
+
+class BullyAlgorithmMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        # Initialize server list
+        servers = [1, 2, 3]
+        request.server_id = 1  # Example server id
+        response = self.get_response(request)
+        return response

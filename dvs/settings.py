@@ -147,6 +147,7 @@ MIDDLEWARE = [
     # Other middleware classes...
     'dvs_app.middleware.NTPTimeMiddleware',
     'dvs_app.middleware.ClientInteractionMiddleware',
+    'dvs_app.middleware.BullyAlgorithmMiddleware',
 ]
 
 #MEDIA_ROOT = '/home/nd-system/Documents/GitHub/Distributed-Video-Transmission/media/videos'
