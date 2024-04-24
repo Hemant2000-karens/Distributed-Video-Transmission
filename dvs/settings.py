@@ -92,7 +92,15 @@ DATABASES = {
         'PASSWORD': 'password',
         'HOST': 'localhost',  # or your MySQL host
         'PORT': '3306',       # or your MySQL port
-    }
+    },
+    #  'backup': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'database2',
+    #     'USER': 'user2',
+    #     'PASSWORD': 'password2',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306',
+    # }
 }
 
 
@@ -135,6 +143,11 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'dvs_app', 'static'),
 ]
+
+# settings.py
+
+# DATABASE_ROUTERS = [ os.path.join(BASE_DIR, 'dvs_app/','routers.py'),]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
