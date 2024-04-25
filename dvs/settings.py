@@ -161,6 +161,7 @@ MIDDLEWARE = [
     'dvs_app.middleware.NTPTimeMiddleware',
     'dvs_app.middleware.ClientInteractionMiddleware',
     'dvs_app.middleware.BullyAlgorithmMiddleware',
+    'dvs_app.middleware.LoadBalancerMiddleware',
 ]
 
 #MEDIA_ROOT = '/home/nd-system/Documents/GitHub/Distributed-Video-Transmission/media/videos'

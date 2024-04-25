@@ -3,6 +3,7 @@ import ntplib
 from .models import ClientInteractionLog
 from ntplib import NTPException
 import time
+from django.conf import settings
 
 class ClientInteractionMiddleware:
     def __init__(self, get_response):
@@ -55,5 +56,21 @@ class BullyAlgorithmMiddleware:
         # Initialize server list
         servers = [1, 2, 3]
         request.server_id = 1  # Example server id
+        response = self.get_response(request)
+        return response
+
+class LoadBalancerMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        # Perform load balancing logic here
+        # For demonstration, we'll simply alternate between two server IDs
+        if 'server_id' not in request.session:
+            request.session['server_id'] = 1
+        else:
+            request.session['server_id'] = 2 if request.session['server_id'] == 1 else 1
+
+        # Continue processing the request
         response = self.get_response(request)
         return response

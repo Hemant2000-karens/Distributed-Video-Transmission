@@ -136,9 +136,9 @@ def my_view(request):
     log_entry = ClientInteractionLog.objects.create(
         client_ip=client_ip,action=action
     )
-    
+    server_id = request.session.get('server_id')
     # Return a JSON response indicating success
-    return JsonResponse({'success': True})
+    return JsonResponse({'success': True, 'server_id': server_id})
     # Your view logic...
 
 
